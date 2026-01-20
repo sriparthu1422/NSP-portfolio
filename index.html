@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- Fonts: Poppins -->
+    <link rel="icon" type="image/png" href="images/img.png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -60,7 +61,7 @@
 
     <!-- Home Section -->
     <section id="home" class="home-section">
-      <div class="home-section-content" data-aos="fade-up">
+      <div class="home-section-content">
         <h1 class="head-name" id="typing-name"></h1>
         <p class="para-content" id="typing-content"></p>
         
@@ -72,7 +73,7 @@
         </div>
       </div>
 
-      <div class="home-social-media" data-aos="fade-up" data-aos-delay="400">
+      <div class="home-social-media">
         <a href="https://www.linkedin.com/in/sri-parthu-198273284/" target="_blank" class="social-media-link" aria-label="LinkedIn">
           <i class="fa-brands fa-linkedin-in"></i>
         </a>
@@ -94,10 +95,10 @@
     <!-- About Section -->
     <section id="about" class="about">
       <div class="about-container">
-        <h2 class="head-sec" data-aos="fade-up">About Me</h2>
+        <h2 class="head-sec">About Me</h2>
         
         <div class="about-info-skills">
-          <div class="about-info" data-aos="fade-right" data-aos-delay="200">
+          <div class="about-info">
             <h3 class="my-head-info">Who I Am</h3>
             <p class="my-info">
               I'm a dedicated <strong>Frontend Web Developer</strong> with a passion for crafting beautiful, intuitive, and highly functional digital experiences. My core strength lies in <strong>HTML, CSS, JavaScript, and React</strong>, allowing me to build responsive applications that delight users.
@@ -112,7 +113,7 @@
             </div>
           </div>
           
-          <div class="about-skills" data-aos="fade-left" data-aos-delay="300">
+          <div class="about-skills">
             <h3 class="my-skill">Tech Stack</h3>
             <div class="skills">
               <span class="skills-skills">HTML5</span>
@@ -131,12 +132,12 @@
 
     <!-- Projects Section -->
     <section id="projects" class="projects-section">
-      <h2 class="projects-title" data-aos="fade-up">My Projects</h2>
+      <h2 class="projects-title">My Projects</h2>
       <div class="projects-container">
         <!-- Project 1 -->
-        <a href="https://nallabellisriparthuu.github.io/NSP-portfolio/" target="_blank" class="project-card-wrapper" data-aos="fade-up" data-aos-delay="100">
+        <a href="https://nallabellisriparthuu.github.io/NSP-portfolio/" target="_blank" class="project-card-wrapper">
           <article class="project-card">
-            <img src="images/Screenshot 2025-10-16 181540.png" alt="Portfolio Website" loading="lazy" />
+            <img src="images/portfolio-preview.png" alt="Portfolio Website" loading="lazy" />
             <div class="project-content">
               <h2>Personal Portfolio</h2>
               <p>
@@ -147,22 +148,9 @@
         </a>
 
         <!-- Project 2 -->
-        <a href="https://nallabellisriparthuu.github.io/TODO-application/" target="_blank" class="project-card-wrapper" data-aos="fade-up" data-aos-delay="200">
+        <a href="https://nallabellisriparthuu.github.io/TODO-application/" target="_blank" class="project-card-wrapper">
           <article class="project-card">
-            <img src="images/TODO.png" alt="Todo Application" loading="lazy" />
-            <div class="project-content">
-              <h2>Smart Todo App</h2>
-              <p>
-                A productivity-focused Todo app featuring local storage persistence, real-time updates, and a clean UI using Vanilla JavaScript. Helps users organize daily tasks efficiently.
-              </p>
-            </div>
-          </article>
-        </a>
-
-        <!-- Project 3 -->
-        <a href="https://nallabellisriparthuu.github.io/TODO-application/" target="_blank" class="project-card-wrapper" data-aos="fade-up" data-aos-delay="200">
-          <article class="project-card">
-            <img src="images/TODO.png" alt="Todo Application" loading="lazy" />
+            <img src="images/todo-app.png" alt="Todo Application" loading="lazy" />
             <div class="project-content">
               <h2>Smart Todo App</h2>
               <p>
@@ -174,9 +162,9 @@
 
         <!-- Placeholder Projects (Initially Hidden) -->
         <!-- Note: Wrapped in div instead of 'a' if not clickable yet, but using common class for layout consistency -->
-        <div class="project-card-wrapper project-hidden" data-aos="fade-up" data-aos-delay="300">
+        <div class="project-card-wrapper project-hidden">
           <article class="project-card">
-            <img src="images/project3.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=Project+Upcoming'" alt="Project 3" />
+            <img src="https://via.placeholder.com/600x400?text=Project+Upcoming" alt="E-Commerce Dashboard" />
             <div class="project-content">
               <h2>E-Commerce Dashboard</h2>
               <p>An upcoming project featuring a comprehensive admin dashboard for e-commerce management, built with React.</p>
@@ -184,9 +172,9 @@
           </article>
         </div>
 
-        <div class="project-card-wrapper project-hidden" data-aos="fade-up" data-aos-delay="100">
+        <div class="project-card-wrapper project-hidden">
           <article class="project-card">
-            <img src="images/project4.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=Project+Upcoming'" alt="Project 4" />
+            <img src="https://via.placeholder.com/600x400?text=Project+Upcoming" alt="Weather Tracker" />
             <div class="project-content">
               <h2>Weather Tracker</h2>
               <p>A real-time weather tracking application using OpenWeatherMap API to fetch and display forecasts.</p>
@@ -195,7 +183,7 @@
         </div>
       </div>
 
-      <div class="load-more-container" data-aos="fade-up">
+      <div class="load-more-container">
         <button id="load-more-btn" class="load-more-btn">
           View More <i class="fa-solid fa-angle-down"></i>
         </button>
@@ -204,8 +192,8 @@
 
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
-      <h2 class="contact-title" data-aos="fade-up">Get In Touch</h2>
-      <div class="contact-container" data-aos="zoom-in" data-aos-delay="200">
+      <h2 class="contact-title">Get In Touch</h2>
+      <div class="contact-container">
         <form id="contact-form">
           <div class="input-group">
             <label for="name">Full Name</label>
@@ -282,6 +270,13 @@
     </footer>
 
     <!-- Scripts -->
+    <!-- GSAP Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- GSAP ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- GSAP TextPlugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+    
     <script src="scripts.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   </body>

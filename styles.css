@@ -164,6 +164,20 @@ ul {
   color: var(--text-muted);
   max-width: 700px;
   margin: 0 auto 40px;
+  position: relative;
+}
+
+#typing-name::after,
+#typing-content::after {
+  content: '|';
+  margin-left: 5px;
+  color: var(--primary);
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .resume-btn {
@@ -369,7 +383,7 @@ ul {
   border: 1px solid rgba(255, 107, 0, 0.1); /* Subtle orange border */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: all 0.4s ease;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -392,8 +406,7 @@ ul {
   transition: transform 0.5s ease;
 }
 
-.project-card-wrapper:hover img,
-.project-card:hover img {
+.project-card-wrapper:hover img {
   transform: scale(1.03);
 }
 
