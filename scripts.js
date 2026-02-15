@@ -3,7 +3,84 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
   // =========================
-  // Initialize AOS
+  // Custom Cursor
+  // =========================
+  const cursorDot = document.querySelector("[data-cursor-dot]");
+  const cursorOutline = document.querySelector("[data-cursor-outline]");
+
+  if (window.matchMedia("(pointer: fine)").matches && cursorDot && cursorOutline) {
+      window.addEventListener("mousemove", (e) => {
+        const posX = e.clientX;
+        const posY = e.clientY;
+
+        // Dot follows immediately
+        gsap.to(cursorDot, {
+            x: posX,
+            y: posY,
+            duration: 0,
+            ease: "none"
+        });
+
+        // Outline follows with delay
+        gsap.to(cursorOutline, {
+            x: posX,
+            y: posY,
+            duration: 0.15,
+            ease: "power2.out"
+        });
+      });
+
+      // Hover effects
+      const hoverables = document.querySelectorAll("a, button, .menu-icon, .social-icon, .project-card-wrapper");
+      
+      const addHover = () => {
+        document.body.classList.add("hovering");
+        gsap.to(cursorDot, { scale: 3, duration: 0.2 }); // Larger dot for blend mode
+      };
+      
+      const removeHover = () => {
+        document.body.classList.remove("hovering");
+        gsap.to(cursorDot, { scale: 1, duration: 0.2 });
+      };
+
+      hoverables.forEach(el => {
+          el.addEventListener("mouseenter", addHover);
+          el.addEventListener("mouseleave", removeHover);
+      });
+  }
+
+  // =========================
+  // Initialize Lenis (Smooth Scroll)
+  // =========================
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: 'vertical',
+    gestureDirection: 'vertical',
+    smooth: true,
+    mouseMultiplier: 1,
+    smoothTouch: false,
+    touchMultiplier: 2,
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+
+  // Sync ScrollTrigger with Lenis
+  /* 
+     Since we are using Lenis for smooth scrolling, we need to tell ScrollTrigger to update 
+     on every frame effectively, but native ScrollTrigger integration usually works fine 
+     with Lenis if we just keep the raf loop running. 
+     However, sometimes it's good practice to bind them if needed. 
+     For now, standard raf loop is sufficient for basic sync.
+  */
+
+  // =========================
+  // Initialize AOS (Optional - GSAP is preferred but keeping for existing elements)
   // =========================
   if (window.AOS) {
     AOS.init({
@@ -69,21 +146,65 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // GSAP - Section Reveal Animations
+  // GSAP - Enhanced Section Reveal Animations
   // =========================
   const sectionTitles = document.querySelectorAll(".head-sec, .projects-title, .contact-title, .load-more-container");
   sectionTitles.forEach((title) => {
-    gsap.from(title, {
-      scrollTrigger: {
-        trigger: title,
-        start: "top 90%",
-      },
-      y: 30,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out"
-    });
+    gsap.fromTo(title, 
+      { y: 50, opacity: 0, skewY: 5 },
+      {
+        scrollTrigger: {
+          trigger: title,
+          start: "top 90%",
+        },
+        y: 0,
+        opacity: 1,
+        skewY: 0,
+        duration: 1,
+        ease: "power4.out"
+      }
+    );
   });
+
+  // =========================
+  // 3D Tilt Effect for Project Cards
+  // =========================
+  const cards = document.querySelectorAll(".project-card");
+  
+  if (window.matchMedia("(min-width: 768px)").matches) {
+    cards.forEach(card => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = ((y - centerY) / centerY) * -8; // Max 8deg
+        const rotateY = ((x - centerX) / centerX) * 8;
+        
+        gsap.to(card, {
+          rotateX: rotateX,
+          rotateY: rotateY,
+          transformPerspective: 1000,
+          scale: 1.02,
+          duration: 0.4,
+          ease: "power2.out"
+        });
+      });
+      
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, {
+          rotateX: 0,
+          rotateY: 0,
+          scale: 1,
+          duration: 0.6,
+          ease: "elastic.out(1, 0.5)"
+        });
+      });
+    });
+  }
 
   const sectionsToReveal = [
     { selector: ".about-info", from: { x: -100, opacity: 0 } },

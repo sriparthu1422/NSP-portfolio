@@ -1,9 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portfolio of Sri Parthu, a passionate Frontend Developer specializing in responsive and visually appealing web applications." />
+    <meta
+      name="description"
+      content="Portfolio of Sri Parthu, a passionate Frontend Developer specializing in responsive and visually appealing web applications."
+    />
     <title>Sri Parthu | Frontend Developer</title>
 
     <!-- Preconnect for Performance -->
@@ -28,7 +31,7 @@
 
     <!-- AOS CSS for Animations -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    
+
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="styles.css" />
 
@@ -36,6 +39,10 @@
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
   </head>
   <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
     <!-- Navigation Bar -->
     <nav class="navigation">
       <a href="#home">
@@ -44,8 +51,13 @@
           <span class="my-name"><span class="my-fname">Sri</span>Parthu.</span>
         </div>
       </a>
-      
-      <div class="menu-icon" role="button" tabindex="0" aria-label="Toggle menu">
+
+      <div
+        class="menu-icon"
+        role="button"
+        tabindex="0"
+        aria-label="Toggle menu"
+      >
         <i class="fa-solid fa-bars"></i>
       </div>
 
@@ -61,11 +73,18 @@
 
     <!-- Home Section -->
     <section id="home" class="home-section">
+      <!-- Hero Background Shapes -->
+      <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+      
       <div class="home-section-content">
         <h1 class="head-name" id="typing-name"></h1>
         <p class="para-content" id="typing-content"></p>
-        
-        <div class="resume-dwnld" id="resume-button" style="display: none;">
+
+        <div class="resume-dwnld" id="resume-button" style="display: none">
           <a href="#" class="resume-btn" download aria-label="Download Resume">
             <span>Download CV</span>
             <i class="fa-solid fa-download"></i>
@@ -74,19 +93,44 @@
       </div>
 
       <div class="home-social-media">
-        <a href="https://www.linkedin.com/in/sri-parthu-198273284/" target="_blank" class="social-media-link" aria-label="LinkedIn">
+        <a
+          href="https://www.linkedin.com/in/sri-parthu-198273284/"
+          target="_blank"
+          class="social-media-link"
+          aria-label="LinkedIn"
+        >
           <i class="fa-brands fa-linkedin-in"></i>
         </a>
-        <a href="#" target="_blank" class="social-media-link" aria-label="GitHub">
+        <a
+          href="#"
+          target="_blank"
+          class="social-media-link"
+          aria-label="GitHub"
+        >
           <i class="fa-brands fa-github"></i>
         </a>
-        <a href="https://hashnode.com/@sriparthu1014" target="_blank" class="social-media-link" aria-label="Hashnode">
+        <a
+          href="https://hashnode.com/@sriparthu1014"
+          target="_blank"
+          class="social-media-link"
+          aria-label="Hashnode"
+        >
           <i class="fa-brands fa-hashnode"></i>
         </a>
-        <a href="#" target="_blank" class="social-media-link" aria-label="Instagram">
+        <a
+          href="#"
+          target="_blank"
+          class="social-media-link"
+          aria-label="Instagram"
+        >
           <i class="fa-brands fa-instagram"></i>
         </a>
-        <a href="#" target="_blank" class="social-media-link" aria-label="X (Twitter)">
+        <a
+          href="#"
+          target="_blank"
+          class="social-media-link"
+          aria-label="X (Twitter)"
+        >
           <i class="fa-brands fa-x-twitter"></i>
         </a>
       </div>
@@ -96,23 +140,31 @@
     <section id="about" class="about">
       <div class="about-container">
         <h2 class="head-sec">About Me</h2>
-        
+
         <div class="about-info-skills">
           <div class="about-info">
             <h3 class="my-head-info">Who I Am</h3>
             <p class="my-info">
-              I'm a dedicated <strong>Frontend Web Developer</strong> with a passion for crafting beautiful, intuitive, and highly functional digital experiences. My core strength lies in <strong>HTML, CSS, JavaScript, and React</strong>, allowing me to build responsive applications that delight users.
+              I'm a dedicated <strong>Frontend Web Developer</strong> with a
+              passion for crafting beautiful, intuitive, and highly functional
+              digital experiences. My core strength lies in
+              <strong>HTML, CSS, JavaScript, and React</strong>, allowing me to
+              build responsive applications that delight users.
             </p>
             <p class="my-info">
-              With experience in <strong>modern web standards</strong> and a keen eye for design, I transform ideas into reality. I am always exploring new technologies to stay at the forefront of the industry.
+              With experience in <strong>modern web standards</strong> and a
+              keen eye for design, I transform ideas into reality. I am always
+              exploring new technologies to stay at the forefront of the
+              industry.
             </p>
             <div class="contact-dwnld">
               <a href="#contact" class="contact-btn">
-                Hire Me <i class="fa-solid fa-paper-plane" style="margin-left: 8px;"></i>
+                Hire Me
+                <i class="fa-solid fa-paper-plane" style="margin-left: 8px"></i>
               </a>
             </div>
           </div>
-          
+
           <div class="about-skills">
             <h3 class="my-skill">Tech Stack</h3>
             <div class="skills">
@@ -135,39 +187,70 @@
       <h2 class="projects-title">My Projects</h2>
       <div class="projects-container">
         <!-- Project 1 -->
-        <a href="https://nallabellisriparthuu.github.io/NSP-portfolio/" target="_blank" class="project-card-wrapper">
+        <a
+          href="https://nallabellisriparthuu.github.io/NSP-portfolio/"
+          target="_blank"
+          class="project-card-wrapper"
+        >
           <article class="project-card">
-            <img src="images/portfolio-preview.png" alt="Portfolio Website" loading="lazy" />
+            <img
+              src="images/portfolio-preview.png"
+              alt="Portfolio Website"
+              loading="lazy"
+            />
             <div class="project-content">
               <h2>Personal Portfolio</h2>
               <p>
-                A high-performance, dark-themed personal portfolio showcasing my journey and skills. Features include advanced animations with AOS, EmailJS integration for contact, and a fully responsive layout.
+                A high-performance, dark-themed personal portfolio showcasing my
+                journey and skills. Features include advanced animations with
+                AOS, EmailJS integration for contact, and a fully responsive
+                layout.
               </p>
             </div>
           </article>
         </a>
 
         <!-- Project 2 -->
-        <a href="https://nallabellisriparthuu.github.io/TODO-application/" target="_blank" class="project-card-wrapper">
+        <a
+          href="https://nallabellisriparthuu.github.io/TODO-application/"
+          target="_blank"
+          class="project-card-wrapper"
+        >
           <article class="project-card">
-            <img src="images/todo-app.png" alt="Todo Application" loading="lazy" />
+            <img
+              src="images/todo-app.png"
+              alt="Todo Application"
+              loading="lazy"
+            />
             <div class="project-content">
               <h2>Smart Todo App</h2>
               <p>
-                A productivity-focused Todo app featuring local storage persistence, real-time updates, and a clean UI using Vanilla JavaScript. Helps users organize daily tasks efficiently.
+                A productivity-focused Todo app featuring local storage
+                persistence, real-time updates, and a clean UI using Vanilla
+                JavaScript. Helps users organize daily tasks efficiently.
               </p>
             </div>
           </article>
         </a>
 
         <!-- Project 2 -->
-        <a href="https://nallabellisriparthuu.github.io/TODO-application/" target="_blank" class="project-card-wrapper">
+        <a
+          href="https://nallabellisriparthuu.github.io/TODO-application/"
+          target="_blank"
+          class="project-card-wrapper"
+        >
           <article class="project-card">
-            <img src="images/todo-app.png" alt="Todo Application" loading="lazy" />
+            <img
+              src="images/todo-app.png"
+              alt="Todo Application"
+              loading="lazy"
+            />
             <div class="project-content">
               <h2>Smart Todo App</h2>
               <p>
-                A productivity-focused Todo app featuring local storage persistence, real-time updates, and a clean UI using Vanilla JavaScript. Helps users organize daily tasks efficiently.
+                A productivity-focused Todo app featuring local storage
+                persistence, real-time updates, and a clean UI using Vanilla
+                JavaScript. Helps users organize daily tasks efficiently.
               </p>
             </div>
           </article>
@@ -177,20 +260,32 @@
         <!-- Note: Wrapped in div instead of 'a' if not clickable yet, but using common class for layout consistency -->
         <div class="project-card-wrapper project-hidden">
           <article class="project-card">
-            <img src="https://via.placeholder.com/600x400?text=Project+Upcoming" alt="E-Commerce Dashboard" />
+            <img
+              src="https://via.placeholder.com/600x400?text=Project+Upcoming"
+              alt="E-Commerce Dashboard"
+            />
             <div class="project-content">
               <h2>E-Commerce Dashboard</h2>
-              <p>An upcoming project featuring a comprehensive admin dashboard for e-commerce management, built with React.</p>
+              <p>
+                An upcoming project featuring a comprehensive admin dashboard
+                for e-commerce management, built with React.
+              </p>
             </div>
           </article>
         </div>
 
         <div class="project-card-wrapper project-hidden">
           <article class="project-card">
-            <img src="https://via.placeholder.com/600x400?text=Project+Upcoming" alt="Weather Tracker" />
+            <img
+              src="https://via.placeholder.com/600x400?text=Project+Upcoming"
+              alt="Weather Tracker"
+            />
             <div class="project-content">
               <h2>Weather Tracker</h2>
-              <p>A real-time weather tracking application using OpenWeatherMap API to fetch and display forecasts.</p>
+              <p>
+                A real-time weather tracking application using OpenWeatherMap
+                API to fetch and display forecasts.
+              </p>
             </div>
           </article>
         </div>
@@ -210,19 +305,44 @@
         <form id="contact-form">
           <div class="input-group">
             <label for="name">Full Name</label>
-            <input type="text" id="name" placeholder="John Doe" required autocomplete="name" />
+            <input
+              type="text"
+              id="name"
+              placeholder="John Doe"
+              required
+              autocomplete="name"
+            />
           </div>
           <div class="input-group">
             <label for="email">Email Address</label>
-            <input type="email" id="email" placeholder="john@example.com" required autocomplete="email" />
+            <input
+              type="email"
+              id="email"
+              placeholder="john@example.com"
+              required
+              autocomplete="email"
+            />
           </div>
           <div class="input-group">
             <label for="message">Your Message</label>
-            <textarea id="message" rows="5" placeholder="How can I help you?" required></textarea>
+            <textarea
+              id="message"
+              rows="5"
+              placeholder="How can I help you?"
+              required
+            ></textarea>
           </div>
-          <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane" style="margin-right: 8px;"></i> Send Message</button>
-          
-          <p id="form-message" class="success-message hidden" role="status" aria-live="polite"></p>
+          <button type="submit" class="submit-btn">
+            <i class="fa-solid fa-paper-plane" style="margin-right: 8px"></i>
+            Send Message
+          </button>
+
+          <p
+            id="form-message"
+            class="success-message hidden"
+            role="status"
+            aria-live="polite"
+          ></p>
         </form>
       </div>
     </section>
@@ -230,16 +350,28 @@
     <!-- Footer -->
     <footer class="footer">
       <div class="footer-container">
-        
         <div class="footer-content">
           <!-- Column 1: Brand & Desc -->
           <div class="footer-logo">
-            <div class="image-name" style="margin-left:0;">
-              <img src="images/img.png" alt="Sri Parthu Logo" class="logo-img" style="border-color:transparent; padding:0; height:50px; width:50px;" />
-              <span class="my-name" style="font-size:1.5rem;"><span class="my-fname">Sri</span>Parthu.</span>
+            <div class="image-name" style="margin-left: 0">
+              <img
+                src="images/img.png"
+                alt="Sri Parthu Logo"
+                class="logo-img"
+                style="
+                  border-color: transparent;
+                  padding: 0;
+                  height: 50px;
+                  width: 50px;
+                "
+              />
+              <span class="my-name" style="font-size: 1.5rem"
+                ><span class="my-fname">Sri</span>Parthu.</span
+              >
             </div>
             <p class="footer-desc">
-              Building digital experiences with passion and precision. Let's create something amazing together.
+              Building digital experiences with passion and precision. Let's
+              create something amazing together.
             </p>
           </div>
 
@@ -247,10 +379,42 @@
           <div class="footer-section">
             <h3>Quick Links</h3>
             <ul class="footer-links">
-              <li><a href="#home"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem; color:var(--primary);"></i> Home</a></li>
-              <li><a href="#about"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem; color:var(--primary);"></i> About</a></li>
-              <li><a href="#projects"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem; color:var(--primary);"></i> Projects</a></li>
-              <li><a href="#contact"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem; color:var(--primary);"></i> Contact</a></li>
+              <li>
+                <a href="#home"
+                  ><i
+                    class="fa-solid fa-chevron-right"
+                    style="font-size: 0.7rem; color: var(--primary)"
+                  ></i>
+                  Home</a
+                >
+              </li>
+              <li>
+                <a href="#about"
+                  ><i
+                    class="fa-solid fa-chevron-right"
+                    style="font-size: 0.7rem; color: var(--primary)"
+                  ></i>
+                  About</a
+                >
+              </li>
+              <li>
+                <a href="#projects"
+                  ><i
+                    class="fa-solid fa-chevron-right"
+                    style="font-size: 0.7rem; color: var(--primary)"
+                  ></i>
+                  Projects</a
+                >
+              </li>
+              <li>
+                <a href="#contact"
+                  ><i
+                    class="fa-solid fa-chevron-right"
+                    style="font-size: 0.7rem; color: var(--primary)"
+                  ></i>
+                  Contact</a
+                >
+              </li>
             </ul>
           </div>
 
@@ -258,13 +422,28 @@
           <div class="footer-section">
             <h3>Connect</h3>
             <div class="footer-social">
-              <a href="https://www.linkedin.com/in/sri-parthu-198273284/" target="_blank" class="social-link" aria-label="LinkedIn">
+              <a
+                href="https://www.linkedin.com/in/sri-parthu-198273284/"
+                target="_blank"
+                class="social-link"
+                aria-label="LinkedIn"
+              >
                 <i class="fa-brands fa-linkedin-in"></i>
               </a>
-              <a href="https://github.com/nallabellisriparthuu" target="_blank" class="social-link" aria-label="GitHub">
+              <a
+                href="https://github.com/nallabellisriparthuu"
+                target="_blank"
+                class="social-link"
+                aria-label="GitHub"
+              >
                 <i class="fa-brands fa-github"></i>
               </a>
-              <a href="https://hashnode.com/@sriparthu1014" target="_blank" class="social-link" aria-label="Hashnode">
+              <a
+                href="https://hashnode.com/@sriparthu1014"
+                target="_blank"
+                class="social-link"
+                aria-label="Hashnode"
+              >
                 <i class="fa-brands fa-hashnode"></i>
               </a>
               <a href="#" class="social-link" aria-label="Twitter">
@@ -276,9 +455,11 @@
 
         <div class="footer-bottom">
           <p>&copy; 2025 <span>Sri Parthu</span>. All rights reserved.</p>
-          <p>Designed with <i class="fa-solid fa-heart" style="color:var(--primary);"></i></p>
+          <p>
+            Designed with
+            <i class="fa-solid fa-heart" style="color: var(--primary)"></i>
+          </p>
         </div>
-
       </div>
     </footer>
 
@@ -289,8 +470,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <!-- GSAP TextPlugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
-    
+
     <script src="scripts.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   </body>
 </html>
