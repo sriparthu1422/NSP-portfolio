@@ -105,13 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
     y: 100,
     opacity: 0,
     duration: 1,
-  }, "-=0.8")
-  .from(".home-social-media .social-media-link", {
-    scale: 0,
-    opacity: 0,
-    stagger: 0.1,
-    duration: 0.8,
-  }, "-=0.5");
+    stagger: 0.2
+  }, "-=0.8");
+
+  // Set initial state for social icons (hidden)
+  gsap.set(".home-social-media .social-media-link", { scale: 0, opacity: 0 });
 
   // =========================
   // GSAP - Typing Effect
@@ -139,7 +137,26 @@ document.addEventListener("DOMContentLoaded", () => {
       onComplete: () => {
         if (resumeButton) {
           resumeButton.style.display = "block";
-          gsap.fromTo(resumeButton, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
+          
+          // Animate Button
+          gsap.fromTo(resumeButton, 
+            { opacity: 0, y: 20 }, 
+            { 
+              opacity: 1, 
+              y: 0, 
+              duration: 0.5,
+              onComplete: () => {
+                // Animate Social Icons AFTER Button
+                 gsap.to(".home-social-media .social-media-link", {
+                  scale: 1,
+                  opacity: 1,
+                  stagger: 0.1,
+                  duration: 0.5,
+                  ease: "back.out(1.7)"
+                });
+              }
+            }
+          );
         }
       }
     });
