@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       // Hover effects
-      const hoverables = document.querySelectorAll("a, button, .menu-icon, .social-icon, .project-card-wrapper");
+      const hoverables = document.querySelectorAll("a, button, .menu-icon, .social-icon");
       
       const addHover = () => {
         document.body.classList.add("hovering");

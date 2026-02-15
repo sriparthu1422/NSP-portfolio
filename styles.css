@@ -537,11 +537,10 @@ ul {
   margin: 0 auto;
 }
 
-/* Ensure the wrapper (which might be an <a> tag) behaves as a block grid item */
+/* Ensure the wrapper behaves as a block grid item */
 .project-card-wrapper {
   display: block;
   height: 100%;
-  text-decoration: none;
   color: inherit;
 }
 
@@ -560,11 +559,12 @@ ul {
   flex-direction: column;
   height: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 .project-card-wrapper:hover .project-card,
 .project-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
   border-color: var(--primary);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
@@ -582,6 +582,12 @@ ul {
   transform: scale(1.03);
 }
 
+.project-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .project-content h2 {
   font-size: 1.4rem;
   margin-bottom: 10px;
@@ -592,6 +598,80 @@ ul {
   font-size: 0.95rem;
   color: var(--text-muted);
   line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1; /* Pushes content down */
+}
+
+/* New Tech Stack Styles */
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tech-pill {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--primary);
+  background: rgba(255, 107, 0, 0.1);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 107, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .tech-pill {
+  background: rgba(255, 107, 0, 0.2);
+  border-color: rgba(255, 107, 0, 0.4);
+}
+
+/* New Action Buttons */
+.project-links {
+  display: flex;
+  gap: 15px;
+  margin-top: auto; /* Pushes to bottom */
+}
+
+.link-btn {
+  flex: 1;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.link-btn.demo {
+  background: var(--gradient);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 10px rgba(255, 107, 0, 0.3);
+}
+
+.link-btn.demo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 107, 0, 0.5);
+  filter: brightness(1.1);
+}
+
+.link-btn.code {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.link-btn.code:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--text-main);
+  color: var(--text-main);
+  transform: translateY(-2px);
 }
 
 .project-hidden {
