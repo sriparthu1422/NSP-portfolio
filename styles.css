@@ -446,21 +446,50 @@ ul {
 }
 
 .skills-skills {
-  padding: 10px 20px;
+  position: relative;
+  padding: 12px 24px;
   background: var(--bg-secondary);
   border: var(--glass-border);
   border-radius: 8px;
   color: var(--text-main);
   font-size: 0.9rem;
   font-weight: 500;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px; /* Ensure uniform width */
   transition: all 0.3s ease;
 }
 
+.skills-skills .skill-text {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.skills-skills .skill-icon {
+  position: absolute;
+  font-size: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  color: var(--primary);
+}
+
 .skills-skills:hover {
-  background: var(--primary);
-  color: #fff;
-  transform: translateY(-3px);
+  border-color: var(--primary);
   box-shadow: 0 5px 15px var(--primary-glow);
+  background: rgba(40, 40, 40, 0.6);
+}
+
+.skills-skills:hover .skill-text {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.skills-skills:hover .skill-icon {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .contact-dwnld {

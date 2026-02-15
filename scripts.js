@@ -376,15 +376,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // EmailJS Integration
+  // Contact Form Submission (Google Sheets)
   // =========================
-  (function initEmailJS() {
-    const PUBLIC_KEY = "pGffREMUo0ReUy7jM"; 
-    if (window.emailjs) {
-      emailjs.init(PUBLIC_KEY);
-    }
-  })();
-
   const contactForm = document.getElementById("contact-form");
   const formMessageEl = document.getElementById("form-message");
 
@@ -394,7 +387,6 @@ document.addEventListener("DOMContentLoaded", () => {
     formMessageEl.className = `success-message ${type === "error" ? "error" : ""}`;
     formMessageEl.classList.remove("hidden");
     
-    // GSAP notification reveal
     gsap.fromTo(formMessageEl, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 });
     
     setTimeout(() => {
@@ -411,24 +403,23 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
       btn.disabled = true;
 
-      const params = {
-        from_name: document.getElementById("name").value,
-        from_email: document.getElementById("email").value,
-        message: document.getElementById("message").value,
-      };
+      // Google Script Web App URL
+      const scriptURL = "https://script.google.com/macros/s/AKfycbwvKepDppwqvjC58VKyV3drH6ndeKqL-6uUTAGDcqlYwwdbv-5DhPlDsfSle0aqGmN8/exec";
 
-      emailjs.send("service_3z2lewp", "template_18s2cvr", params)
-        .then(() => {
+      const formData = new FormData(contactForm);
+
+      fetch(scriptURL, { method: 'POST', body: formData })
+        .then(response => {
           showMessage("Message sent successfully! I'll get back to you soon.", "success");
           contactForm.reset();
         })
-        .catch((error) => {
-          console.error("EmailJS Error:", error);
+        .catch(error => {
+          console.error('Error!', error.message);
           showMessage("Failed to send message. Please try again.", "error");
         })
         .finally(() => {
-          btn.innerHTML = originalHTML;
-          btn.disabled = false;
+           btn.innerHTML = originalHTML;
+           btn.disabled = false;
         });
     });
   }
