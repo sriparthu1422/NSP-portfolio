@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sriparthu1422.github.io/NSP-portfolio/sitemap.xml
