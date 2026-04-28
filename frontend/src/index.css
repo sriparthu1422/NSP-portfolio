@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply antialiased text-slate-800 dark:text-slate-200 bg-primary-light dark:bg-primary-dark transition-colors duration-300;
+  }
+
+  @media (min-width: 1024px) {
+    * {
+      cursor: none !important;
+    }
+  }
+
+  /* Ensure minimum touch target on mobile for interactive elements */
+  @media (pointer: coarse) {
+    button, a, input, select, textarea {
+      min-height: 44px;
+    }
+  }
+}
+
+/* ─── Design Tokens ─── */
+
+.glass {
+  @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-white/20 dark:border-slate-800/20;
+}
+
+/* Slightly less blur on mobile for performance */
+@media (max-width: 640px) {
+  .glass {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+.hero-gradient {
+  background: radial-gradient(circle at top right, rgba(249, 115, 22, 0.15), transparent 40%),
+              radial-gradient(circle at bottom left, rgba(249, 115, 22, 0.1), transparent 40%);
+}
+
+.hero-dot-bg {
+  background-image: radial-gradient(rgba(249, 115, 22, 0.2) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ─── GSAP Helper Classes ─── */
+
+.scroll-reveal {
+  will-change: transform, opacity;
+}
+
+.grid-stagger > * {
+  will-change: transform, opacity;
+}
+
+/* ─── Accessibility ─── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Safe area for notched devices ─── */
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  footer {
+    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+  }
+}
