@@ -65,7 +65,7 @@ const ContactForm = () => {
             onFocus={onInputFocus}
             onBlur={onInputBlur}
             className="w-full bg-white/50 dark:bg-slate-900/50 border border-white/20 dark:border-slate-800/20 rounded-xl px-4 py-3 focus:border-accent-orange focus:ring-1 focus:ring-accent-orange outline-none transition-all shadow-sm"
-            placeholder="John Doe"
+            placeholder="Your Name"
           />
         </div>
         <div className="space-y-2">
@@ -79,7 +79,7 @@ const ContactForm = () => {
             onFocus={onInputFocus}
             onBlur={onInputBlur}
             className="w-full bg-white/50 dark:bg-slate-900/50 border border-white/20 dark:border-slate-800/20 rounded-xl px-4 py-3 focus:border-accent-orange focus:ring-1 focus:ring-accent-orange outline-none transition-all shadow-sm"
-            placeholder="john@example.com"
+            placeholder="Your Email"
           />
         </div>
       </div>
