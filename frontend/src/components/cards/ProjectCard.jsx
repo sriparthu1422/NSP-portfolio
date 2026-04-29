@@ -55,20 +55,9 @@ const ProjectCard = ({ project }) => {
         />
         <div 
           ref={overlayRef}
-          className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent opacity-0 flex items-end p-6"
+          className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent opacity-0"
         >
-          <div className="flex gap-4">
-            {githubLink && (
-              <a href={githubLink} target="_blank" rel="noreferrer" className="p-3 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-accent-orange transition-colors">
-                <Github size={20} />
-              </a>
-            )}
-            {liveLink && (
-              <a href={liveLink} target="_blank" rel="noreferrer" className="p-3 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-accent-orange transition-colors">
-                <ExternalLink size={20} />
-              </a>
-            )}
-          </div>
+          {/* Overlay text removed as per request */}
         </div>
       </div>
 
@@ -95,6 +84,18 @@ const ProjectCard = ({ project }) => {
             View Details 
             <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
           </button>
+          
+          {liveLink && (
+            <a 
+              href={liveLink} 
+              target="_blank" 
+              rel="noreferrer" 
+              className="text-sm font-bold flex items-center gap-2 text-accent-orange hover:opacity-80 transition-opacity"
+            >
+              <ExternalLink size={16} />
+              Live Site
+            </a>
+          )}
         </div>
       </div>
     </div>
