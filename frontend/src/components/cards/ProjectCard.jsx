@@ -70,11 +70,11 @@ const ProjectCard = ({ project }) => {
           ))}
         </div>
         
-        <h3 className="text-2xl font-display font-bold mb-3 group-hover:text-accent-orange transition-colors">
+        <h3 className="text-2xl font-display font-bold mb-3 text-accent-orange transition-colors">
           {title}
         </h3>
         
-        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6 flex-grow">
+        <p className="text-white/90 dark:text-white/80 text-sm leading-relaxed mb-6 flex-grow font-light">
           {description}
         </p>
 
