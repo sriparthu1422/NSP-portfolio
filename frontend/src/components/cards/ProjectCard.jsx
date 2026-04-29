@@ -55,9 +55,8 @@ const ProjectCard = ({ project }) => {
         />
         <div 
           ref={overlayRef}
-          className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent opacity-0"
+          className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 flex items-end p-6"
         >
-          {/* Overlay text removed as per request */}
         </div>
       </div>
 
@@ -80,21 +79,18 @@ const ProjectCard = ({ project }) => {
         </p>
 
         <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-          <button className="text-sm font-bold flex items-center gap-2 group/btn hover:text-accent-orange transition-colors">
-            View Details 
-            <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-          </button>
-          
-          {liveLink && (
+          {liveLink ? (
             <a 
               href={liveLink} 
               target="_blank" 
-              rel="noreferrer" 
-              className="text-sm font-bold flex items-center gap-2 text-accent-orange hover:opacity-80 transition-opacity"
+              rel="noreferrer"
+              className="text-sm font-bold flex items-center gap-2 group/btn hover:text-accent-orange transition-colors"
             >
-              <ExternalLink size={16} />
-              Live Site
+              Live Site 
+              <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
             </a>
+          ) : (
+            <span className="text-sm font-bold text-slate-400">Coming Soon</span>
           )}
         </div>
       </div>
