@@ -8,8 +8,8 @@ import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
 import Button from '../../components/common/Button';
 
 const socials = [
-  { icon: Github, href: 'https://github.com', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+  { icon: Github, href: 'https://github.com/sriparthu1422', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/sriparthu-nallabelli-881744400/', label: 'LinkedIn' },
   { icon: Mail, href: 'mailto:admin@sriparthu.com', label: 'Email' },
 ];
 
