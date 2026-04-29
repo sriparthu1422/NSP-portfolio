@@ -81,8 +81,6 @@ const HeroSection = () => {
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: 'expo.out', duration: 1.2 } });
 
-    gsap.set('.hero-reveal-init', { opacity: 0, y: 20 });
-
     tl.to('.hero-badge', { opacity: 1, y: 0, duration: 0.8 }, 0.2)
       .to('.hero-title-init', { opacity: 1, y: 0, duration: 0.8, onComplete: () => setStartName(true) }, 0.4);
 
