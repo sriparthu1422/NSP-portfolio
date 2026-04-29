@@ -8,27 +8,33 @@ import nodemailer from 'nodemailer';
 export const submitContact = asyncHandler(async (req, res, next) => {
   const contact = await Contact.create(req.body);
 
-  // Send email (optional background task)
-  // Simplified for now
-  try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+  // Send email (Non-blocking background task)
+  const sendEmail = async () => {
+    try {
+      const transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        secure: process.env.SMTP_PORT == 465,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
+        },
+        connectionTimeout: 5000, // 5 seconds timeout
+      });
 
-    await transporter.sendMail({
-      from: `"${process.env.FROM_NAME}" <${process.env.FROM_EMAIL}>`,
-      to: process.env.FROM_EMAIL,
-      subject: `New Portfolio Inquiry: ${req.body.subject}`,
-      text: `Name: ${req.body.name}\nEmail: ${req.body.email}\n\nMessage:\n${req.body.message}`,
-    });
-  } catch (err) {
-    console.error('Email failed to send:', err.message);
-  }
+      await transporter.sendMail({
+        from: `"${process.env.FROM_NAME}" <${process.env.FROM_EMAIL}>`,
+        to: process.env.FROM_EMAIL,
+        subject: `New Portfolio Inquiry: ${req.body.subject}`,
+        text: `Name: ${req.body.name}\nEmail: ${req.body.email}\n\nMessage:\n${req.body.message}`,
+      });
+    } catch (err) {
+      console.error('Background Email failed:', err.message);
+    }
+  };
+
+  // Trigger email in background without 'await' to respond to user immediately
+  sendEmail();
 
   res.status(201).json({
     success: true,
