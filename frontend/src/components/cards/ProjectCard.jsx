@@ -84,7 +84,7 @@ const ProjectCard = ({ project }) => {
               href={liveLink} 
               target="_blank" 
               rel="noreferrer"
-              className="text-sm font-bold flex items-center gap-2 group/btn hover:text-accent-orange transition-colors"
+              className="text-sm font-bold flex items-center gap-2 group/btn text-accent-orange hover:text-white transition-colors"
             >
               Live Site 
               <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
