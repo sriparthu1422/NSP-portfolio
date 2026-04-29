@@ -33,9 +33,12 @@ const ContactForm = () => {
     setStatus('loading');
     try {
       await axios.post('/api/v1/contacts', formData);
-      setStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setStatus('idle'), 5000);
+      // Wait 40 seconds before showing success message as requested
+      setTimeout(() => {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      }, 40000);
     } catch (err) {
       console.error(err);
       setStatus('error');
