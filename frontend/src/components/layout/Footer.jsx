@@ -17,7 +17,7 @@ const Footer = () => (
             Sri <span className="text-accent-orange">Parthu</span>
           </h3>
           <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xs leading-relaxed">
-            A passionate Full Stack Developer & GenAI enthusiast building the future of the web with modern technologies.
+            A passionate Developer enthusiast building the future of the web with modern technologies.
           </p>
           <div className="flex space-x-4 pt-2">
             {socials.map(({ icon: Icon, href, label }) => (
