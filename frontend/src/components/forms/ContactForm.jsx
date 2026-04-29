@@ -33,14 +33,11 @@ const ContactForm = () => {
     setStatus('loading');
     try {
       await axios.post('/api/v1/contacts', formData);
-      // Wait 40 seconds before showing success message as requested
-      setTimeout(() => {
-        setStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        setTimeout(() => setStatus('idle'), 5000);
-      }, 40000);
+      setStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setStatus('idle'), 5000);
     } catch (err) {
-      console.error(err);
+      console.error('Submission error:', err.response?.data || err.message);
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     }
@@ -129,13 +126,18 @@ const ContactForm = () => {
       </button>
 
       {status === 'success' && (
-        <div ref={successRef} className="flex items-center gap-2 text-green-500 text-sm justify-center">
-          <CheckCircle size={16} /> Message received! I will get back to you soon.
+        <div ref={successRef} className="flex flex-col items-center gap-3 p-6 glass border-green-500/50 text-green-500 rounded-2xl animate-in zoom-in duration-500">
+          <div className="bg-green-500/20 p-3 rounded-full">
+            <CheckCircle size={32} />
+          </div>
+          <p className="font-bold text-lg">Message Sent Successfully!</p>
+          <p className="text-slate-400 text-sm">I'll get back to you as soon as possible.</p>
         </div>
       )}
       {status === 'error' && (
-        <div className="flex items-center gap-2 text-red-500 text-sm justify-center">
-          <AlertCircle size={16} /> Something went wrong. Please try again.
+        <div className="flex items-center gap-2 text-red-500 text-sm justify-center p-4 glass border-red-500/20 rounded-xl">
+          <AlertCircle size={16} /> 
+          <span>Failed to send message. Please check your internet or try again.</span>
         </div>
       )}
     </form>
