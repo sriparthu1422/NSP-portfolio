@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
+import rateLimit from 'express-rate-limit';
 import connectDB from './config/db.js';
 
 // Load env vars
@@ -25,6 +27,17 @@ const app = express();
 // Body parser
 app.use(express.json());
 
+// Cookie parser
+app.use(cookieParser());
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 mins
+  max: 100,
+  message: 'Too many requests, please try again later.'
+});
+app.use('/api/', limiter);
+
 // Enable CORS
 const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173'].filter(Boolean);
 app.use(cors({
@@ -33,7 +46,31 @@ app.use(cors({
 }));
 
 // Set security headers
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        imgSrc: ["'self'", "data:", "https://res.cloudinary.com", "https://images.unsplash.com"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        connectSrc: ["'self'", process.env.FRONTEND_URL, "http://localhost:5173"],
+      },
+    },
+    crossOriginEmbedderPolicy: false,
+    xFrameOptions: { action: 'sameorigin' },
+  })
+);
+
+app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
+
+app.use((req, res, next) => {
+  res.setHeader(
+    'Permissions-Policy',
+    'geolocation=(), microphone=(), camera=(), payment=()'
+  );
+  next();
+});
 
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {

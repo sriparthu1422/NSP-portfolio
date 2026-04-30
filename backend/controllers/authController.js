@@ -41,6 +41,21 @@ export const getMe = asyncHandler(async (req, res, next) => {
   });
 });
 
+// @desc    Log user out / clear cookie
+// @route   GET /api/v1/auth/logout
+// @access  Private
+export const logout = asyncHandler(async (req, res, next) => {
+  res.cookie('token', 'none', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+
+  res.status(200).json({
+    success: true,
+    data: {},
+  });
+});
+
 // Get token from model, create cookie and send response
 const sendTokenResponse = (user, statusCode, res) => {
   // Create token
@@ -48,8 +63,18 @@ const sendTokenResponse = (user, statusCode, res) => {
     expiresIn: process.env.JWT_EXPIRE,
   });
 
-  res.status(statusCode).json({
+  // Create cookie options
+  const options = {
+    expires: new Date(
+      Date.now() + (process.env.JWT_COOKIE_EXPIRE || 30) * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+  };
+
+  res.status(statusCode).cookie('token', token, options).json({
     success: true,
-    token,
+    token, // keep token in JSON to avoid breaking existing mobile clients if any, though frontend shouldn't store it
   });
 };

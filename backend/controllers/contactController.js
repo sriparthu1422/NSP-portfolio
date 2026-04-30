@@ -1,12 +1,25 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import Contact from '../models/Contact.js';
 import nodemailer from 'nodemailer';
+import { z } from 'zod';
 
 // @desc    Submit contact form
 // @route   POST /api/v1/contacts
 // @access  Public
 export const submitContact = asyncHandler(async (req, res, next) => {
-  const contact = await Contact.create(req.body);
+  const contactSchema = z.object({
+    name: z.string().min(2, 'Name must be at least 2 characters').max(50),
+    email: z.string().email('Invalid email address'),
+    subject: z.string().min(2, 'Subject must be at least 2 characters').max(100),
+    message: z.string().min(10, 'Message must be at least 10 characters').max(2000),
+  });
+
+  const parsed = contactSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ message: parsed.error.errors[0].message });
+  }
+
+  const contact = await Contact.create(parsed.data);
 
   // Send email (Non-blocking background task)
   const sendEmail = async () => {
