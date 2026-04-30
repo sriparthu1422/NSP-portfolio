@@ -5,6 +5,8 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
+import mongoSanitize from 'express-mongo-sanitize';
+import xss from 'xss-clean';
 import connectDB from './config/db.js';
 
 // Load env vars
@@ -29,6 +31,25 @@ app.use(express.json());
 
 // Cookie parser
 app.use(cookieParser());
+
+// Express 5 Compatibility fix for xss-clean and express-mongo-sanitize
+// In Express 5, req.query is a read-only getter, which crashes older middlewares that try to reassign it.
+// We make it writable before passing it to them.
+app.use((req, res, next) => {
+  Object.defineProperty(req, 'query', {
+    value: req.query,
+    writable: true,
+    enumerable: true,
+    configurable: true,
+  });
+  next();
+});
+
+// Sanitize data (Prevent NoSQL Injection)
+app.use(mongoSanitize());
+
+// Prevent XSS attacks
+app.use(xss());
 
 // Rate limiting
 const limiter = rateLimit({
