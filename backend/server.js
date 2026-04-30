@@ -26,6 +26,9 @@ import errorHandler from './middleware/errorMiddleware.js';
 
 const app = express();
 
+// Trust proxy for secure cookies and rate-limiting when hosted on platforms like Render or Vercel
+app.set('trust proxy', 1);
+
 // Body parser
 app.use(express.json());
 
@@ -64,8 +67,10 @@ app.use(cors({
   origin: function (origin, callback) {
     if (!origin) return callback(null, true); // allow requests with no origin (like mobile apps or curl requests)
     
-    const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173'].filter(Boolean);
-    if (allowedOrigins.includes(origin) || origin.startsWith('http://localhost:')) {
+    // Normalize FRONTEND_URL to remove any trailing slashes that might break exact matching
+    const frontendUrl = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.replace(/\/$/, '') : '';
+    
+    if (origin === frontendUrl || origin.startsWith('http://localhost:') || origin.endsWith('.vercel.app')) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
