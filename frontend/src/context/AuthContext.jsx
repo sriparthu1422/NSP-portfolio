@@ -3,14 +3,14 @@ import axios from 'axios';
 
 const AuthContext = createContext();
 
+// Ensure axios sends cookies with every request globally
+axios.defaults.withCredentials = true;
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Ensure axios sends cookies with every request
-    axios.defaults.withCredentials = true;
-
     const loadUser = async () => {
       try {
         const { data } = await axios.get('/api/v1/auth/me');
