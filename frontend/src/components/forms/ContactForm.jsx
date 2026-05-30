@@ -32,8 +32,20 @@ const ContactForm = () => {
     e.preventDefault();
     setStatus('loading');
     try {
+      // 1. Log the message in the portfolio database
       await axios.post('/api/v1/contacts', formData);
       setStatus('success');
+
+      // 2. Format a high-fidelity WhatsApp message
+      const whatsappNumber = '917093729809'; // Country code 91 + WhatsApp number
+      const formattedMessage = `*📬 New Message from Portfolio*\n\n*👤 Name:* ${formData.name}\n*📧 Email:* ${formData.email}\n*📌 Subject:* ${formData.subject}\n\n*📝 Message:*\n${formData.message}`;
+      const encodedMessage = encodeURIComponent(formattedMessage);
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
+
+      // 3. Open WhatsApp Web or Mobile App in a new tab
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+      // 4. Reset form fields
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setStatus('idle'), 5000);
     } catch (err) {
