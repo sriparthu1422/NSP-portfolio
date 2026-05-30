@@ -1,8 +1,9 @@
-import React, { lazy, Suspense } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import CustomCursor from './components/common/CustomCursor';
+import IntroVideo from './components/common/IntroVideo';
 import { Loader2 } from 'lucide-react';
 
 // Lazy-load pages for code splitting
@@ -21,10 +22,17 @@ const PageLoader = () => (
 );
 
 function App() {
+  const [showIntro, setShowIntro] = useState(true);
+
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+  };
+
   return (
     <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <CustomCursor />
       <Suspense fallback={<PageLoader />}>
+        {showIntro && <IntroVideo onComplete={handleIntroComplete} />}
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
@@ -45,3 +53,4 @@ function App() {
 }
 
 export default App;
+

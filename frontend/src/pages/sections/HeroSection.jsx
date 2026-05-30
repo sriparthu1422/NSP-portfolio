@@ -78,7 +78,28 @@ const HeroSection = () => {
   const [startParagraph, setStartParagraph] = React.useState(false);
   const [showExtras, setShowExtras] = React.useState(false);
 
+  const [introComplete, setIntroComplete] = React.useState(() => {
+    // If the intro has already finished or is not active, run immediately
+    return window.nsp_intro_complete === true;
+  });
+
+  React.useEffect(() => {
+    if (window.nsp_intro_complete) {
+      setIntroComplete(true);
+      return;
+    }
+
+    const handleIntroComplete = () => {
+      setIntroComplete(true);
+    };
+
+    window.addEventListener('nsp_intro_complete', handleIntroComplete);
+    return () => window.removeEventListener('nsp_intro_complete', handleIntroComplete);
+  }, []);
+
   useGSAP(() => {
+    if (!introComplete) return;
+
     const tl = gsap.timeline({ defaults: { ease: 'expo.out', duration: 1.2 } });
 
     tl.to('.hero-badge', { opacity: 1, y: 0, duration: 0.8 }, 0.2)
@@ -94,7 +115,7 @@ const HeroSection = () => {
         scrub: true,
       },
     });
-  }, { scope: heroRef });
+  }, { scope: heroRef, dependencies: [introComplete] });
 
   return (
     <section ref={heroRef} className="min-h-[85vh] md:min-h-[80vh] flex items-center justify-center pt-12 md:pt-20 relative">
@@ -110,19 +131,19 @@ const HeroSection = () => {
         </div>
 
         <h1 className="hero-title-init opacity-0 translate-y-4 text-hero font-display font-black tracking-tight mb-5 md:mb-6 min-h-[1.2em]">
-          <Typewriter text="Hi, I'm " onComplete={() => setStartName(true)} />
-          {startName && <Typewriter text="Sri Parthu" className="text-accent-orange" onComplete={() => setStartParagraph(true)} />}
+          {introComplete && <Typewriter text="Hi, I'm " onComplete={() => setStartName(true)} />}
+          {introComplete && startName && <Typewriter text="Sri Parthu" className="text-accent-orange" onComplete={() => setStartParagraph(true)} />}
         </h1>
 
         <p className="text-base md:text-xl lg:text-2xl text-slate-500 dark:text-slate-400 max-w-3xl mx-auto mb-8 md:mb-10 leading-relaxed font-light min-h-[4em] md:min-h-[3em]">
-          {startParagraph && (
+          {introComplete && startParagraph && (
             <Typewriter 
               text="I build scalable, high-performance web applications using modern technologies, with hands-on expertise in " 
               speed={40}
               onComplete={() => setShowExtras(true)}
             />
           )}
-          {showExtras && (
+          {introComplete && showExtras && (
             <TextCycler 
               phrases={["GenAI.", "Full Stack Developer.", "DevOps."]} 
               className="text-accent-orange font-semibold"

@@ -14,6 +14,7 @@ const AdminProjects = () => {
     description: '',
     techStack: '',
     liveLink: '',
+    githubLink: '',
     image: { url: '', publicId: '' },
     featured: false,
     order: 0,
@@ -40,6 +41,7 @@ const AdminProjects = () => {
       setFormData({
         ...project,
         techStack: project.techStack.join(', '),
+        githubLink: project.githubLink || '',
       });
     } else {
       setEditingProject(null);
@@ -48,6 +50,7 @@ const AdminProjects = () => {
         description: '',
         techStack: '',
         liveLink: '',
+        githubLink: '',
         image: { url: '', publicId: '' },
         featured: false,
         order: 0,
@@ -204,10 +207,30 @@ const AdminProjects = () => {
                 </div>
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-widest">Live Demo</label>
+                    <label htmlFor="modal-live-link" className="text-xs font-bold text-slate-500 uppercase tracking-widest">Live Demo</label>
                     <div className="relative">
                       <Globe className="absolute left-3 top-2.5 text-slate-400" size={16} />
-                      <input type="text" value={formData.liveLink} onChange={(e) => setFormData({ ...formData, liveLink: e.target.value })} className="w-full bg-white/50 dark:bg-slate-900/50 border border-white/20 dark:border-slate-800/20 rounded-xl pl-10 pr-4 py-2.5 focus:border-accent-orange outline-none" />
+                      <input 
+                        id="modal-live-link"
+                        type="text" 
+                        value={formData.liveLink || ''} 
+                        onChange={(e) => setFormData({ ...formData, liveLink: e.target.value })} 
+                        className="w-full bg-white/50 dark:bg-slate-900/50 border border-white/20 dark:border-slate-800/20 rounded-xl pl-10 pr-4 py-2.5 focus:border-accent-orange outline-none" 
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="modal-github-link" className="text-xs font-bold text-slate-500 uppercase tracking-widest">GitHub Repository</label>
+                    <div className="relative">
+                      <Github className="absolute left-3 top-2.5 text-slate-400" size={16} />
+                      <input 
+                        id="modal-github-link"
+                        type="text" 
+                        value={formData.githubLink || ''} 
+                        onChange={(e) => setFormData({ ...formData, githubLink: e.target.value })} 
+                        className="w-full bg-white/50 dark:bg-slate-900/50 border border-white/20 dark:border-slate-800/20 rounded-xl pl-10 pr-4 py-2.5 focus:border-accent-orange outline-none" 
+                        placeholder="https://github.com/username/project"
+                      />
                     </div>
                   </div>
                 </div>

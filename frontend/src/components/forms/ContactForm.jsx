@@ -55,8 +55,9 @@ const ContactForm = () => {
     <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
       <div className="grid md:grid-cols-2 gap-6">
         <div className="space-y-2">
-          <label className="text-sm font-bold text-slate-500 uppercase tracking-wider">Name</label>
+          <label htmlFor="contact-name" className="text-sm font-bold text-slate-500 uppercase tracking-wider">Name</label>
           <input
+            id="contact-name"
             type="text"
             name="name"
             required
@@ -69,8 +70,9 @@ const ContactForm = () => {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-bold text-slate-500 uppercase tracking-wider">Email</label>
+          <label htmlFor="contact-email" className="text-sm font-bold text-slate-500 uppercase tracking-wider">Email</label>
           <input
+            id="contact-email"
             type="email"
             name="email"
             required
@@ -85,8 +87,9 @@ const ContactForm = () => {
       </div>
       
       <div className="space-y-2">
-        <label className="text-sm font-bold text-slate-500 uppercase tracking-wider">Subject</label>
+        <label htmlFor="contact-subject" className="text-sm font-bold text-slate-500 uppercase tracking-wider">Subject</label>
         <input
+          id="contact-subject"
           type="text"
           name="subject"
           required
@@ -100,8 +103,9 @@ const ContactForm = () => {
       </div>
 
       <div className="space-y-2">
-        <label className="text-sm font-bold text-slate-500 uppercase tracking-wider">Message</label>
+        <label htmlFor="contact-message" className="text-sm font-bold text-slate-500 uppercase tracking-wider">Message</label>
         <textarea
+          id="contact-message"
           name="message"
           required
           rows="5"

@@ -51,6 +51,7 @@ const ProjectCard = ({ project }) => {
           ref={imageRef}
           src={image?.url || 'https://via.placeholder.com/600x400'} 
           alt={title}
+          loading="lazy"
           className="object-cover w-full h-full"
         />
         <div 
@@ -91,6 +92,18 @@ const ProjectCard = ({ project }) => {
             </a>
           ) : (
             <span className="text-sm font-bold text-slate-400">Coming Soon</span>
+          )}
+
+          {githubLink && (
+            <a 
+              href={githubLink} 
+              target="_blank" 
+              rel="noreferrer"
+              className="p-2 bg-white/5 border border-white/10 hover:border-accent-orange/40 backdrop-blur-md rounded-full text-slate-400 hover:text-accent-orange transition-all hover:scale-105 active:scale-95"
+              aria-label={`View ${title} source code on GitHub`}
+            >
+              <Github size={18} />
+            </a>
           )}
         </div>
       </div>

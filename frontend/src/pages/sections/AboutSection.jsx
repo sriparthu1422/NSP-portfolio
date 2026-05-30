@@ -41,7 +41,7 @@ const AboutSection = () => (
       </div>
 
       {/* Skill Cards */}
-      <div className="grid grid-cols-1 xs:grid-cols-3 gap-4 md:gap-6 grid-stagger">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 grid-stagger">
         {skills.map(({ icon: Icon, title, desc }) => (
           <div key={title} className="flex flex-col items-center p-5 md:p-6 glass rounded-2xl border-orange-500/10">
             <Icon className="text-accent-orange mb-3 md:mb-4" size={36} />
