@@ -16,7 +16,8 @@ export const submitContact = asyncHandler(async (req, res, next) => {
 
   const parsed = contactSchema.safeParse(req.body);
   if (!parsed.success) {
-    return res.status(400).json({ message: parsed.error.errors[0].message });
+    const errorMessage = parsed.error.errors?.[0]?.message || parsed.error.issues?.[0]?.message || 'Validation failed';
+    return res.status(400).json({ message: errorMessage });
   }
 
   const contact = await Contact.create(parsed.data);
