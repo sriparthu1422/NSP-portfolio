@@ -22,7 +22,10 @@ const PageLoader = () => (
 );
 
 function App() {
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(() => {
+    const path = window.location.pathname;
+    return !(path.startsWith('/admin') || path === '/login');
+  });
 
   const handleIntroComplete = () => {
     setShowIntro(false);

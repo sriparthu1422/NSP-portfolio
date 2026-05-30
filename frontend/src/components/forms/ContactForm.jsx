@@ -12,6 +12,7 @@ const ContactForm = () => {
     message: '',
   });
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
+  const [errorMessage, setErrorMessage] = useState('');
   const formRef = useRef();
   const successRef = useRef();
 
@@ -31,13 +32,16 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('loading');
+    setErrorMessage('');
     try {
       await axios.post('/api/v1/contacts', formData);
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setStatus('idle'), 5000);
     } catch (err) {
+      const errorMsg = err.response?.data?.message || 'Failed to send message. Please check your internet or try again.';
       console.error('Submission error:', err.response?.data || err.message);
+      setErrorMessage(errorMsg);
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     }
@@ -141,7 +145,7 @@ const ContactForm = () => {
       {status === 'error' && (
         <div className="flex items-center gap-2 text-red-500 text-sm justify-center p-4 glass border-red-500/20 rounded-xl">
           <AlertCircle size={16} /> 
-          <span>Failed to send message. Please check your internet or try again.</span>
+          <span>{errorMessage}</span>
         </div>
       )}
     </form>
