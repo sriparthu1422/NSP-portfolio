@@ -1,0 +1,18 @@
+Act as my Blog Publishing Agent.
+
+Today's niche:
+- Website Development
+- Digital Marketing
+- AI
+- Software Training
+
+Tasks:
+1. Find a trending topic.
+2. Generate SEO keywords.
+3. Create blog outline.
+4. Write a complete article.
+5. Generate meta title.
+6. Generate meta description.
+7. Generate FAQ.
+8. Generate feature image prompt.
+9. Save in content folder.
