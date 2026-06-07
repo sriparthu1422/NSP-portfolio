@@ -10,6 +10,7 @@ const AdminBlogs = () => {
   const [fetchingMetadata, setFetchingMetadata] = useState(false);
   const [importUrl, setImportUrl] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [importingMarkdown, setImportingMarkdown] = useState(false);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -53,6 +54,25 @@ const AdminBlogs = () => {
       });
     }
     setIsModalOpen(true);
+  };
+
+  const handleMarkdownImport = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setImportingMarkdown(true);
+    try {
+      const markdown = await file.text();
+      const { data } = await axios.post('/api/v1/blogs/import', { markdown });
+      fetchBlogs();
+      alert(`Blog ${data.action}: ${data.data.title}`);
+    } catch (err) {
+      console.error(err);
+      alert('Markdown import failed. Check file format and try again.');
+    } finally {
+      setImportingMarkdown(false);
+      e.target.value = '';
+    }
   };
 
   const handleImport = async () => {
@@ -134,6 +154,22 @@ const AdminBlogs = () => {
         >
           <Plus size={20} /> New Blog
         </button>
+      </div>
+
+      <div className="glass p-6 rounded-3xl border-white/20">
+        <h3 className="text-sm font-bold text-slate-500 uppercase tracking-widest mb-4">Blog Agent — Import Markdown</h3>
+        <label className="flex items-center gap-4 cursor-pointer glass hover:bg-slate-100 dark:hover:bg-slate-800 border-dashed border-white/40 border-2 rounded-xl px-6 py-4 transition-all">
+          <input type="file" accept=".md" onChange={handleMarkdownImport} className="hidden" />
+          {importingMarkdown ? (
+            <Loader2 className="animate-spin text-accent-orange" size={20} />
+          ) : (
+            <Upload size={20} className="text-accent-orange" />
+          )}
+          <div>
+            <p className="font-bold text-sm">Upload blog-agent markdown file</p>
+            <p className="text-xs text-slate-500">e.g. content/blog-2026-06-07.md — creates or updates by slug</p>
+          </div>
+        </label>
       </div>
 
       <div className="glass p-6 rounded-3xl border-white/20">

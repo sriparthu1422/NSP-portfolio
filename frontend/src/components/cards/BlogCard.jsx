@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ExternalLink, Calendar } from 'lucide-react';
 
 const BlogCard = ({ blog }) => {
-  const { title, preview, tag, externalUrl, createdAt } = blog;
+  const { title, preview, tag, externalUrl, slug, createdAt } = blog;
   const date = new Date(createdAt).toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
@@ -31,9 +32,17 @@ const BlogCard = ({ blog }) => {
         </span>
       </div>
 
-      <h3 className="text-xl font-bold mb-3 line-clamp-2 leading-tight hover:text-accent-orange transition-colors cursor-pointer">
-        {title}
-      </h3>
+      {externalUrl ? (
+        <h3 className="text-xl font-bold mb-3 line-clamp-2 leading-tight hover:text-accent-orange transition-colors">
+          {title}
+        </h3>
+      ) : (
+        <Link to={`/blog/${slug}`}>
+          <h3 className="text-xl font-bold mb-3 line-clamp-2 leading-tight hover:text-accent-orange transition-colors">
+            {title}
+          </h3>
+        </Link>
+      )}
       
       <p className="text-slate-500 dark:text-slate-400 text-sm mb-6 line-clamp-3">
         {preview}
@@ -50,9 +59,12 @@ const BlogCard = ({ blog }) => {
             Read on {tag} <ExternalLink size={12} />
           </a>
         ) : (
-          <button className="text-accent-orange text-xs font-bold hover:underline">
+          <Link
+            to={`/blog/${slug}`}
+            className="text-accent-orange text-xs font-bold hover:underline"
+          >
             Read Full Article
-          </button>
+          </Link>
         )}
       </div>
       </div>

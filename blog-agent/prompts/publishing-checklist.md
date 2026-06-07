@@ -26,15 +26,14 @@ Use this after every "Create Today's Blog" run.
 - [ ] Saved as `content/blog-YYYY-MM-DD.md`
 - [ ] Frontmatter fields populated
 - [ ] Git commit message prepared
-- [ ] Run `bash scripts/publish.sh` (Git Bash on Windows) when ready to publish
+- [ ] Run `bash scripts/publish.sh` (Git Bash on Windows) — commits, pushes, and auto-imports to API
 
-## Portfolio App (optional)
+## Portfolio App
 
-- [ ] Import into admin: title → `title`, meta description → `preview`
-- [ ] Paste markdown body → `content`
-- [ ] Upload cover image via `/api/v1/upload`
-- [ ] Set tag (default: `Technical`)
-- [ ] Publish or schedule
+- [ ] Configure `blog-agent/.env` (copy from `.env.example`)
+- [ ] Or upload `.md` file in Admin → Blog Agent — Import Markdown
+- [ ] Upload cover image via admin if desired
+- [ ] Verify live URL: `https://nsp-portfolio-frontend.vercel.app/blog/{slug}`
 
 ## Distribution
 

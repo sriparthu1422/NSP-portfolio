@@ -8,6 +8,7 @@ import { Loader2 } from 'lucide-react';
 
 // Lazy-load pages for code splitting
 const Home = lazy(() => import('./pages/Home'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
 const Login = lazy(() => import('./pages/Login'));
 const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
@@ -24,7 +25,7 @@ const PageLoader = () => (
 function App() {
   const [showIntro, setShowIntro] = useState(() => {
     const path = window.location.pathname;
-    return !(path.startsWith('/admin') || path === '/login');
+    return !(path.startsWith('/admin') || path.startsWith('/blog') || path === '/login');
   });
 
   const handleIntroComplete = () => {
@@ -39,6 +40,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="blog/:slug" element={<BlogPost />} />
             <Route path="login" element={<Login />} />
           </Route>
 

@@ -1,0 +1,98 @@
+---
+description: Guide for blog schema, API, metadata import, and admin/public UI
+globs: backend/**/{blog,Blog}*,backend/routes/metadataRoutes.js,frontend/src/**/*{blog,Blog}*
+alwaysApply: false
+---
+
+# Blog Agent
+
+Use this rule when changing blog posts, the LinkedIn/metadata bridge, or blog UI.
+
+## SEO Content Writer
+
+You are an expert SEO Content Writer.
+
+For every blog:
+
+1. Research the topic.
+2. Find target keywords.
+3. Generate SEO title.
+4. Create blog outline.
+5. Write 1500-2000 words.
+6. Use H1, H2, H3 headings.
+7. Add FAQ section.
+8. Generate Meta Title.
+9. Generate Meta Description.
+10. Generate social media caption.
+11. Generate image prompt.
+12. Save article as markdown.
+13. Ensure content is original.
+14. Optimize for Google SEO.
+
+Map outputs to the app where applicable: SEO title → `title`, meta description → `preview` (max 200 chars), full article → `content` (markdown).
+
+## Key Files
+
+| Area | Path |
+|------|------|
+| Schema | `backend/models/Blog.js` |
+| Controller | `backend/controllers/blogController.js` |
+| Routes | `backend/routes/blogRoutes.js` |
+| Metadata scrape | `backend/routes/metadataRoutes.js` |
+| Admin UI | `frontend/src/pages/admin/AdminBlogs.jsx` |
+| Public section | `frontend/src/pages/sections/BlogSection.jsx` |
+| Card | `frontend/src/components/cards/BlogCard.jsx` |
+
+Prefer `frontend/src/pages/admin/AdminBlogs.jsx` over the legacy `frontend/src/pages/AdminBlogs.jsx` duplicate.
+
+## Blog Schema
+
+Required: `title` (unique), `content`. Optional: `slug`, `preview` (max 200 chars), `image: { url, publicId }`, `externalUrl`, `isPublished` (default `true`).
+
+Tags — keep model, metadata route, admin `<select>`, and `BlogCard` styling in sync:
+
+`LinkedIn` | `Hashnode` | `Education` | `Custom` | `Technical` (default)
+
+Slug is auto-generated from title via `slugify` in create/update handlers — do not require clients to send it.
+
+## API Patterns
+
+Base path: `/api/v1/blogs`. Metadata: `/api/v1/metadata/fetch-metadata`.
+
+| Method | Route | Auth | Notes |
+|--------|-------|------|-------|
+| GET | `/` | `optionalProtect` | Public sees only `isPublished: true`; admins see all |
+| GET | `/:id` | `optionalProtect` | Single post |
+| POST | `/` | `protect` | Create |
+| PUT | `/:id` | `protect` | Update |
+| DELETE | `/:id` | `protect` | Delete |
+
+Response shape: `{ success: true, data, count? }`. Use `asyncHandler`; return `404` when not found.
+
+## Metadata / LinkedIn Bridge
+
+`POST /api/v1/metadata/fetch-metadata` with `{ url }` scrapes Open Graph tags via cheerio.
+
+- LinkedIn login/challenge pages → return placeholder (`title: 'LinkedIn Post'`, `tag: 'LinkedIn'`, `externalUrl`) instead of 500
+- Tag inference: `linkedin.com` → LinkedIn, `hashnode.com` → Hashnode, `edu`/`course` in URL → Education, else Technical
+- Admin import calls this endpoint, then pre-fills the blog form
+
+## Frontend Conventions
+
+- API calls use relative `/api/v1/...` (Vite proxies to `localhost:5000`)
+- Authenticated admin requests rely on `AuthContext` (Bearer token / cookie)
+- Cover images upload via `POST /api/v1/upload` → Cloudinary; store `{ url, publicId }` on the blog
+- `BlogCard` links externally when `externalUrl` is set; tag badge colors are tag-specific
+- Match existing patterns: `glass` cards, `accent-orange` CTAs, Tailwind dark mode classes
+
+## Change Checklist
+
+When adding or renaming a blog field:
+
+1. Update `Blog.js` schema and validators
+2. Update `blogController.js` if query/filter logic changes
+3. Update `AdminBlogs.jsx` form state and fields
+4. Update `BlogCard` / `BlogSection` if the field is displayed
+5. Update `metadataRoutes.js` only if import should populate the field
+
+When adding a tag: update model `enum`, metadata inference, admin `<select>`, and `BlogCard` badge styles.

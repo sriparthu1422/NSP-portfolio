@@ -1,6 +1,7 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import Blog from '../models/Blog.js';
 import slugify from 'slugify';
+import { parseBlogMarkdown, toBlogPayload } from '../utils/parseBlogMarkdown.js';
 
 // @desc    Get all blogs
 // @route   GET /api/v1/blogs
@@ -19,6 +20,66 @@ export const getBlogs = asyncHandler(async (req, res, next) => {
     success: true,
     count: blogs.length,
     data: blogs,
+  });
+});
+
+// @desc    Get single blog by slug
+// @route   GET /api/v1/blogs/slug/:slug
+// @access  Public
+export const getBlogBySlug = asyncHandler(async (req, res, next) => {
+  const query = { slug: req.params.slug };
+  if (!req.user) query.isPublished = true;
+
+  const blog = await Blog.findOne(query);
+
+  if (!blog) {
+    return res.status(404).json({ message: 'Blog not found' });
+  }
+
+  res.status(200).json({
+    success: true,
+    data: blog,
+  });
+});
+
+// @desc    Import or update blog from markdown
+// @route   POST /api/v1/blogs/import
+// @access  Private (JWT or x-import-key)
+export const importBlog = asyncHandler(async (req, res, next) => {
+  const { markdown, ...fields } = req.body;
+
+  let payload = fields;
+  if (markdown) {
+    const { frontmatter, body } = parseBlogMarkdown(markdown);
+    payload = { ...toBlogPayload(frontmatter, body), ...fields };
+  }
+
+  const { title, preview, content, tag = 'Technical', isPublished = true } = payload;
+
+  if (!title || !preview || !content) {
+    return res.status(400).json({
+      message: 'title, preview, and content are required (or provide markdown)',
+    });
+  }
+
+  const slug = slugify(title, { lower: true });
+  let blog = await Blog.findOne({ slug });
+  const isUpdate = Boolean(blog);
+
+  if (blog) {
+    blog = await Blog.findByIdAndUpdate(
+      blog._id,
+      { title, preview, content, tag, isPublished, slug },
+      { new: true, runValidators: true }
+    );
+  } else {
+    blog = await Blog.create({ title, preview, content, tag, isPublished, slug });
+  }
+
+  res.status(isUpdate ? 200 : 201).json({
+    success: true,
+    data: blog,
+    action: isUpdate ? 'updated' : 'created',
   });
 });
 

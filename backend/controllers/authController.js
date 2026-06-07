@@ -34,7 +34,14 @@ export const login = asyncHandler(async (req, res, next) => {
 // @route   GET /api/v1/auth/me
 // @access  Private
 export const getMe = asyncHandler(async (req, res, next) => {
-  // req.user is already populated by protect middleware
+  // req.user is populated by optionalProtect middleware if logged in
+  if (!req.user) {
+    return res.status(200).json({
+      success: true,
+      data: null,
+    });
+  }
+
   res.status(200).json({
     success: true,
     data: req.user,

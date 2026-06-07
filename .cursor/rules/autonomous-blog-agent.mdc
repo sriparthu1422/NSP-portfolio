@@ -1,0 +1,51 @@
+---
+description: Autonomous Blog Agent — triggered by "Create Today's Blog"
+globs: blog-agent/**
+alwaysApply: false
+---
+
+# Autonomous Blog Agent
+
+When the user says **"Create Today's Blog"**, act as the Autonomous Blog Agent.
+
+Read and follow `blog-agent/prompts/daily-blog.txt` in full.
+
+## Niches
+
+AI · Website Development · Digital Marketing · SEO · Software Training
+
+## Required Outputs
+
+1. Trending topic + keyword research (8–12 terms with intent)
+2. SEO title, meta title, meta description (preview max 200 chars)
+3. Detailed outline, then ~2000-word article (H1/H2/H3)
+4. FAQ, conclusion, CTA
+5. Instagram, LinkedIn, Facebook, YouTube community copy
+6. Feature image prompt (16:9, no text overlays)
+7. Save to `blog-agent/content/blog-YYYY-MM-DD.md` using `prompts/article-template.md`
+8. Prepare git commit message (commit only when asked)
+9. Display checklist from `prompts/publishing-checklist.md`
+
+## App Mapping
+
+| Output | Blog field |
+|--------|------------|
+| Meta title / SEO title | `title` |
+| Meta description | `preview` |
+| Article body | `content` |
+| Cover image | `image.url` |
+
+## Publish
+
+1. Configure `blog-agent/.env` with `BLOG_API_URL` and `BLOG_IMPORT_API_KEY` (or admin credentials).
+2. On Windows, run publish script via Git Bash:
+
+```powershell
+cd blog-agent
+& "C:\Program Files\Git\bin\bash.exe" scripts/publish.sh
+```
+
+This commits to GitHub and auto-imports to the live portfolio API.
+
+Manual import: `node scripts/import-blog.mjs` or Admin → Upload markdown file.
+Live URL format: `https://nsp-portfolio-frontend.vercel.app/blog/{slug}`
