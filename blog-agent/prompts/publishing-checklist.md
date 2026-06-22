@@ -33,7 +33,7 @@ Use this after every "Create Today's Blog" run.
 - [ ] Configure `blog-agent/.env` (copy from `.env.example`)
 - [ ] Or upload `.md` file in Admin → Blog Agent — Import Markdown
 - [ ] Upload cover image via admin if desired
-- [ ] Verify live URL: `https://nsp-portfolio-frontend.vercel.app/blog/{slug}`
+- [ ] Verify live URL: `https://sriparthu.vercel.app/blog/{slug}`
 
 ## Distribution
 

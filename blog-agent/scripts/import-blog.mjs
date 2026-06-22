@@ -161,7 +161,7 @@ async function main() {
 
   const blog = data.data;
   const frontend =
-    process.env.FRONTEND_URL || 'https://nsp-portfolio-frontend.vercel.app';
+    process.env.FRONTEND_URL || 'https://sriparthu.vercel.app';
 
   console.log(`✅ Blog ${data.action || action}: ${blog.title}`);
   console.log(`   Slug: ${blog.slug}`);

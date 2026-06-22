@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nsp-portfolio-frontend.vercel.app/sitemap.xml
+Sitemap: https://sriparthu.vercel.app/sitemap.xml

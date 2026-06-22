@@ -15,7 +15,7 @@ Edit `blog-agent/.env`:
 ```env
 BLOG_API_URL=https://nsp-portfolio-backend-g6wj.onrender.com
 BLOG_IMPORT_API_KEY=your-secret-key-here
-FRONTEND_URL=https://nsp-portfolio-frontend.vercel.app
+FRONTEND_URL=https://sriparthu.vercel.app
 ```
 
 Generate a key (run once):
