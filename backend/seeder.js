@@ -12,12 +12,13 @@ mongoose.connect(process.env.MONGO_URI);
 // Import into DB
 const importData = async () => {
   try {
-    const email = process.argv[3];
-    const password = process.argv[4];
-    const name = process.argv[5] || 'Admin';
+    const email = process.argv[3] || process.env.ADMIN_EMAIL;
+    const password = process.argv[4] || process.env.ADMIN_PASSWORD;
+    const name = process.argv[5] || process.env.ADMIN_NAME || 'Admin';
 
     if (!email || !password) {
-      console.log('Please provide email and password: node seeder -i <email> <password> <name?>');
+      console.log('Please provide credentials via args: node seeder -i <email> <password> <name?>');
+      console.log('Or use .env variables: ADMIN_EMAIL, ADMIN_PASSWORD, ADMIN_NAME');
       process.exit();
     }
 
