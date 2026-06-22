@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX, ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
-import introVideo from '../../assets/NSP.mp4';
+import introVideo from '../../assets/NSP Video Resume.mp4';
 import brandImg from '../../assets/img.png';
 
 const IntroVideo = ({ onComplete }) => {
