@@ -37,16 +37,20 @@ const Navbar = () => {
     return href ? (
       <a href={href} className="hover:text-accent-orange transition-colors">{inner}</a>
     ) : (
-      <Link to={to} className="hover:text-accent-orange transition-colors">{inner}</Link>
+      <Link to={to} className="hover:text-accent-orange transition-colors" onClick={() => {
+        if (window.location.pathname === '/') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }}>{inner}</Link>
     );
   };
 
   const links = [
     { label: 'Home', to: '/' },
-    { label: 'About', href: '#about' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Blog', href: '#blog' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'About', href: '/#about' },
+    { label: 'Projects', href: '/#projects' },
+    { label: 'Blog', href: '/#blog' },
+    { label: 'Contact', href: '/#contact' },
   ];
 
   const closeMenu = () => setIsMenuOpen(false);
@@ -56,7 +60,11 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group transition-all">
+          <Link to="/" className="flex items-center gap-3 group transition-all" onClick={() => {
+            if (window.location.pathname === '/') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}>
             <div className="relative w-14 h-14 flex-shrink-0">
               <div className="absolute inset-0 rounded-full bg-accent-orange animate-pulse opacity-20 group-hover:opacity-40 transition-opacity"></div>
               <div className="relative w-full h-full rounded-full border-[3px] border-accent-orange overflow-hidden shadow-lg shadow-orange-500/20">
@@ -110,7 +118,12 @@ const Navbar = () => {
         <div className="px-4 pt-2 pb-4 space-y-1">
           {links.map((link) =>
             link.to ? (
-              <Link key={link.label} to={link.to} className="block px-3 py-3 rounded-lg hover:bg-accent-orange/10 transition-colors text-base" onClick={closeMenu}>
+              <Link key={link.label} to={link.to} className="block px-3 py-3 rounded-lg hover:bg-accent-orange/10 transition-colors text-base" onClick={() => {
+                if (window.location.pathname === '/') {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+                closeMenu();
+              }}>
                 {link.label}
               </Link>
             ) : (
